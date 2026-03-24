@@ -1,0 +1,745 @@
+
+<html>
+  <head>
+    <title>DSA & LLD Roadmap</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div>
+
+<div class="tabs">
+  <button class="tab active" onclick="show('schedule')">📅 Daily Schedule</button>
+  <button class="tab" onclick="show('dsa')">🔥 DSA Patterns</button>
+  <button class="tab" onclick="show('dp')">🧠 DP Deep Dive</button>
+  <button class="tab" onclick="show('graphs')">🕸️ Graphs</button>
+  <button class="tab" onclick="show('trees')">🌳 Trees</button>
+  <button class="tab" onclick="show('lld')">🏗️ LLD Roadmap</button>
+  <button class="tab" onclick="show('revision')">🔁 Revision Strategy</button>
+</div>
+
+<!-- SCHEDULE -->
+<div id="schedule" class="section active">
+  <div class="metric-row">
+    <div class="metric"><div class="metric-val" style="color:#7F77DD">10</div><div class="metric-lbl">months exp</div></div>
+    <div class="metric"><div class="metric-val" style="color:#1D9E75">2-3</div><div class="metric-lbl">months target</div></div>
+    <div class="metric"><div class="metric-val" style="color:#BA7517">600</div><div class="metric-lbl">LC problems done</div></div>
+    <div class="metric"><div class="metric-val" style="color:#D85A30">14h</div><div class="metric-lbl">weekly practice</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="badge badge-purple">WEEKDAY</span><span class="pattern-title">2 hours after work — split into blocks</span></div>
+    <div class="day-row" style="font-size:12px;font-weight:500;color:var(--color-text-secondary)">
+      <div>Block</div><div>Time</div><div>Activity</div>
+    </div>
+    <div class="day-row">
+      <div class="day-label">Warm-up</div><div>20 min</div><div>1 easy/familiar medium — build confidence. Timed.</div>
+    </div>
+    <div class="day-row">
+      <div class="day-label">Core DSA</div><div>60 min</div><div>1 medium problem — pattern focus. No peeking for 25 min. Then look at hint only (not solution).</div>
+    </div>
+    <div class="day-row">
+      <div class="day-label">Review</div><div>20 min</div><div>Read editorial + 1 similar problem by reading (not solving). Note pattern in journal.</div>
+    </div>
+    <div class="day-row">
+      <div class="day-label">LLD/revision</div><div>20 min</div><div>Mon/Wed/Fri: LLD 20 min. Tue/Thu: flash-revise yesterday's problem cold.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="badge badge-teal">WEEKEND</span><span class="pattern-title">5-6 hours — structured, not random</span></div>
+    <div class="day-row">
+      <div class="day-label">Sat AM</div><div>2 hrs</div><div>DP or Graph — 1 hard (attempt 40 min, then full editorial study + re-implement)</div>
+    </div>
+    <div class="day-row">
+      <div class="day-label">Sat PM</div><div>1.5 hrs</div><div>LLD full design — 45 min attempt, 45 min review against reference solution</div>
+    </div>
+    <div class="day-row">
+      <div class="day-label">Sun AM</div><div>2 hrs</div><div>Mock interview simulation — 2 mediums timed 35 min each. No IDE autocomplete.</div>
+    </div>
+    <div class="day-row">
+      <div class="day-label">Sun PM</div><div>1 hr</div><div>Weekly review — re-solve 3 problems you got wrong this week from memory</div>
+    </div>
+  </div>
+
+  <h3>12-Week Phase Plan</h3>
+  <div class="week-block">
+    <div class="week-title">Phase 1 — Weeks 1-4: Foundation Repair (DP + Trees + Graphs basics)</div>
+    <div class="week-sub">
+      Week 1-2: Trees (all traversal patterns, BST, LCA) + Sliding Window + Two Pointer review<br>
+      Week 3-4: DP intro (1D, 2D, Knapsack family) + Graph BFS/DFS basics<br>
+      <b>Target:</b> 6 mediums/week + 1 LLD design/week
+    </div>
+  </div>
+  <div class="week-block" style="border-color:#1D9E75">
+    <div class="week-title">Phase 2 — Weeks 5-8: Intermediate Mastery (DP patterns + Graph advanced)</div>
+    <div class="week-sub">
+      Week 5-6: DP (Intervals, Palindromes, String DP, DP on Trees)<br>
+      Week 7-8: Graph advanced (Dijkstra, Union-Find, Topological Sort, Cycle detection)<br>
+      <b>Target:</b> 7 mediums/week + 1 hard/week + 1 LLD/week
+    </div>
+  </div>
+  <div class="week-block" style="border-color:#BA7517">
+    <div class="week-title">Phase 3 — Weeks 9-11: Mock + Hard problems + Interview simulation</div>
+    <div class="week-sub">
+      Week 9-10: Hard DP, Hard Graphs, Trie, Monotonic Stack, Heap patterns<br>
+      Week 11: Full mock interviews — 3 mocks/week (use Pramp, Interviewing.io or self-mock)<br>
+      <b>Target:</b> 2 mocks/week, 1 hard problem/day
+    </div>
+  </div>
+  <div class="week-block" style="border-color:#D85A30">
+    <div class="week-title">Phase 4 — Week 12: Company-specific + Revision only</div>
+    <div class="week-sub">
+      No new problems. Only revise weak areas from journal. Practice LLD verbally.<br>
+      Apply aggressively — MAANG OA + unicorn referrals simultaneously.
+    </div>
+  </div>
+</div>
+
+<!-- DSA PATTERNS -->
+<div id="dsa" class="section">
+  <div class="tip-box"><b>Strategy for you:</b> You know patterns. Your issue is transfer — solving a <i>new</i> problem with a known pattern. Each entry below has a standard anchor question + a similar "twist" question that uses the same pattern differently.</div>
+
+  <div class="card">
+    <div class="card-header"><span class="badge badge-blue">Arrays & Hashing</span></div>
+    <table>
+      <tr><th>Pattern</th><th>Standard (anchor)</th><th>Similar / Twist (challenge you)</th></tr>
+      <tr><td>Prefix sum</td><td class="q-standard">Subarray sum equals K (LC 560)</td><td><div class="q-similar">Count subarrays with equal 0s and 1s (convert 0→-1, same pattern)</div></td></tr>
+      <tr><td>Prefix sum</td><td class="q-standard">Product of array except self (LC 238)</td><td><div class="q-similar">Max product subarray with at-most K negatives</div></td></tr>
+      <tr><td>Hashing</td><td class="q-standard">Group anagrams (LC 49)</td><td><div class="q-similar">Group strings by shifted pattern (abc → bcd → same group)</div></td></tr>
+      <tr><td>Hashing</td><td class="q-standard">Longest consecutive sequence (LC 128)</td><td><div class="q-similar">Longest arithmetic progression in unsorted array</div></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="badge badge-teal">Two Pointer / Sliding Window</span></div>
+    <table>
+      <tr><th>Pattern</th><th>Standard (anchor)</th><th>Similar / Twist</th></tr>
+      <tr><td>Shrinkable window</td><td class="q-standard">Longest substring without repeat (LC 3)</td><td><div class="q-similar">Longest substring with at-most K distinct chars (LC 340)</div></td></tr>
+      <tr><td>Fixed window</td><td class="q-standard">Max sum subarray of size K</td><td><div class="q-similar">Max vowels in substring of size K (LC 1456)</div></td></tr>
+      <tr><td>Two pointer opposite</td><td class="q-standard">Container with most water (LC 11)</td><td><div class="q-similar">Trapping rain water (LC 42) — same intuition, harder implementation</div></td></tr>
+      <tr><td>Minimum window</td><td class="q-standard">Minimum window substring (LC 76)</td><td><div class="q-similar">Smallest subarray with all distinct chars from pattern</div></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="badge badge-amber">Stack / Monotonic Stack</span></div>
+    <table>
+      <tr><th>Pattern</th><th>Standard (anchor)</th><th>Similar / Twist</th></tr>
+      <tr><td>Next greater element</td><td class="q-standard">Daily temperatures (LC 739)</td><td><div class="q-similar">Next greater element II (circular array, LC 503)</div></td></tr>
+      <tr><td>Histogram</td><td class="q-standard">Largest rectangle in histogram (LC 84)</td><td><div class="q-similar">Maximal rectangle in binary matrix (LC 85) — run LC 84 on each row</div></td></tr>
+      <tr><td>Monotonic stack</td><td class="q-standard">Sum of subarray minimums (LC 907)</td><td><div class="q-similar">Sum of subarray ranges (LC 2104)</div></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="badge badge-coral">Binary Search</span></div>
+    <table>
+      <tr><th>Pattern</th><th>Standard (anchor)</th><th>Similar / Twist</th></tr>
+      <tr><td>On answer space</td><td class="q-standard">Koko eating bananas (LC 875)</td><td><div class="q-similar">Minimum days to make M bouquets (LC 1482) — same binary search on answer</div></td></tr>
+      <tr><td>Rotated array</td><td class="q-standard">Search in rotated sorted array (LC 33)</td><td><div class="q-similar">Find minimum in rotated sorted array II with duplicates (LC 154)</div></td></tr>
+      <tr><td>2D binary search</td><td class="q-standard">Search a 2D matrix (LC 74)</td><td><div class="q-similar">Kth smallest element in sorted matrix (LC 378)</div></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="badge badge-purple">Heap / Priority Queue</span></div>
+    <table>
+      <tr><th>Pattern</th><th>Standard (anchor)</th><th>Similar / Twist</th></tr>
+      <tr><td>K-th element</td><td class="q-standard">Kth largest element (LC 215)</td><td><div class="q-similar">K closest points to origin (LC 973)</div></td></tr>
+      <tr><td>Merge K sorted</td><td class="q-standard">Merge K sorted lists (LC 23)</td><td><div class="q-similar">Smallest range covering K lists (LC 632) — harder variant</div></td></tr>
+      <tr><td>Two heaps</td><td class="q-standard">Find median from data stream (LC 295)</td><td><div class="q-similar">Sliding window median (LC 480) — two heaps with removal</div></td></tr>
+      <tr><td>Task scheduling</td><td class="q-standard">Task scheduler (LC 621)</td><td><div class="q-similar">Reorganize string (LC 767)</div></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="badge badge-teal">Backtracking</span></div>
+    <table>
+      <tr><th>Pattern</th><th>Standard (anchor)</th><th>Similar / Twist</th></tr>
+      <tr><td>Subsets</td><td class="q-standard">Subsets II with duplicates (LC 90)</td><td><div class="q-similar">Count subsets with given sum (DP or backtrack)</div></td></tr>
+      <tr><td>Permutations</td><td class="q-standard">Permutations (LC 46)</td><td><div class="q-similar">Permutation sequence (LC 60) — K-th permutation without generating all</div></td></tr>
+      <tr><td>Combination sum</td><td class="q-standard">Combination sum II (LC 40)</td><td><div class="q-similar">Letter combinations of phone number (LC 17)</div></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="badge badge-blue">Intervals</span></div>
+    <table>
+      <tr><th>Pattern</th><th>Standard (anchor)</th><th>Similar / Twist</th></tr>
+      <tr><td>Merge</td><td class="q-standard">Merge intervals (LC 56)</td><td><div class="q-similar">Employee free time (LC 759) — merge across multiple schedules</div></td></tr>
+      <tr><td>Insert</td><td class="q-standard">Insert interval (LC 57)</td><td><div class="q-similar">Add bold tag in string (LC 616)</div></td></tr>
+      <tr><td>Sweep line</td><td class="q-standard">Meeting rooms II (LC 253)</td><td><div class="q-similar">Car pooling (LC 1094) — capacity constraint added</div></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="badge badge-red">Bit Manipulation</span></div>
+    <table>
+      <tr><th>Pattern</th><th>Standard (anchor)</th><th>Similar / Twist</th></tr>
+      <tr><td>XOR trick</td><td class="q-standard">Single number (LC 136)</td><td><div class="q-similar">Single number III — two missing numbers (LC 260)</div></td></tr>
+      <tr><td>Bit masking</td><td class="q-standard">Number of 1 bits (LC 191)</td><td><div class="q-similar">Counting bits (LC 338) — DP + bit trick</div></td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- DP DEEP DIVE -->
+<div id="dp" class="section">
+  <div class="tip-box"><b>Your real problem with DP:</b> You can solve problems you've seen. You freeze on new ones because you don't have a <i>thinking process</i> yet. Learn the 4-step DP framework first, then patterns become handles.</div>
+
+  <div class="card">
+    <div class="card-header"><span class="badge badge-purple">The 4-Step DP Framework (apply to every new problem)</span></div>
+    <div style="font-size:13px;line-height:1.8">
+      <div style="padding:4px 0"><b>1. Define state</b> — dp[i] means "answer for input of size i" or dp[i][j] means "answer considering first i items, capacity j"</div>
+      <div style="padding:4px 0"><b>2. Write recurrence</b> — how does dp[i] relate to dp[i-1]? (include/exclude, take/skip)</div>
+      <div style="padding:4px 0"><b>3. Base cases</b> — dp[0] = ? dp[1] = ?</div>
+      <div style="padding:4px 0"><b>4. Order of computation</b> — fill left-to-right, or diagonally (intervals), or bottom-up</div>
+    </div>
+  </div>
+
+  <h3>1D DP Patterns</h3>
+  <div class="card">
+    <table>
+      <tr><th>Pattern</th><th>Standard anchor</th><th>Similar twist</th><th>Key recurrence idea</th></tr>
+      <tr>
+        <td>Linear DP</td>
+        <td class="q-standard">Climbing stairs (LC 70)<br><span class="pill pill-med">Med</span></td>
+        <td><div class="q-similar">Min cost climbing stairs (LC 746) — add cost dimension</div></td>
+        <td style="font-size:12px;color:var(--color-text-secondary)">dp[i] = dp[i-1] + dp[i-2]</td>
+      </tr>
+      <tr>
+        <td>Kadane variant</td>
+        <td class="q-standard">Max product subarray (LC 152)<span class="pill pill-med">Med</span></td>
+        <td><div class="q-similar">Max sum circular subarray (LC 918)</div></td>
+        <td style="font-size:12px;color:var(--color-text-secondary)">Track both max and min (negatives flip)</td>
+      </tr>
+      <tr>
+        <td>Decision DP</td>
+        <td class="q-standard">House robber (LC 198)<span class="pill pill-med">Med</span></td>
+        <td><div class="q-similar">House robber II circular (LC 213), then House Robber III on tree (LC 337)</div></td>
+        <td style="font-size:12px;color:var(--color-text-secondary)">dp[i] = max(dp[i-2]+A[i], dp[i-1])</td>
+      </tr>
+      <tr>
+        <td>Jump game family</td>
+        <td class="q-standard">Jump game II (LC 45)<span class="pill pill-med">Med</span></td>
+        <td><div class="q-similar">Jump game III (LC 1306) — BFS variant; Jump game VII (LC 1871)</div></td>
+        <td style="font-size:12px;color:var(--color-text-secondary)">Greedy reachability or BFS states</td>
+      </tr>
+    </table>
+  </div>
+
+  <h3>2D DP Patterns</h3>
+  <div class="card">
+    <table>
+      <tr><th>Pattern</th><th>Standard anchor</th><th>Similar twist</th></tr>
+      <tr>
+        <td>Grid paths</td>
+        <td class="q-standard">Unique paths II with obstacles (LC 63)<span class="pill pill-med">Med</span></td>
+        <td><div class="q-similar">Cherry pickup (LC 741) — two agents on same grid <span class="pill pill-hard">Hard</span></div></td>
+      </tr>
+      <tr>
+        <td>LCS family</td>
+        <td class="q-standard">Longest common subsequence (LC 1143)<span class="pill pill-med">Med</span></td>
+        <td><div class="q-similar">Edit distance (LC 72), Shortest common supersequence (LC 1092)</div></td>
+      </tr>
+      <tr>
+        <td>String match DP</td>
+        <td class="q-standard">Distinct subsequences (LC 115)<span class="pill pill-hard">Hard</span></td>
+        <td><div class="q-similar">Interleaving string (LC 97), Wildcard matching (LC 44)</div></td>
+      </tr>
+    </table>
+  </div>
+
+  <h3>Knapsack Family (most asked in India unicorns)</h3>
+  <div class="card">
+    <table>
+      <tr><th>Type</th><th>Standard anchor</th><th>Similar twist</th></tr>
+      <tr>
+        <td>0/1 Knapsack</td>
+        <td class="q-standard">Partition equal subset sum (LC 416)<span class="pill pill-med">Med</span></td>
+        <td><div class="q-similar">Last stone weight II (LC 1049) — same as 0/1 knapsack framing</div></td>
+      </tr>
+      <tr>
+        <td>Unbounded knapsack</td>
+        <td class="q-standard">Coin change (LC 322)<span class="pill pill-med">Med</span></td>
+        <td><div class="q-similar">Coin change II counting ways (LC 518), Integer break (LC 343)</div></td>
+      </tr>
+      <tr>
+        <td>Bounded</td>
+        <td class="q-standard">Target sum (LC 494)<span class="pill pill-med">Med</span></td>
+        <td><div class="q-similar">Number of ways to reach target with dice rolls (LC 1155)</div></td>
+      </tr>
+    </table>
+  </div>
+
+  <h3>Interval DP (frequently asked in MAANG)</h3>
+  <div class="card">
+    <table>
+      <tr><th>Standard anchor</th><th>Similar twist</th></tr>
+      <tr>
+        <td class="q-standard">Burst balloons (LC 312)<span class="pill pill-hard">Hard</span></td>
+        <td><div class="q-similar">Strange printer (LC 664), Minimum cost tree from leaf values (LC 1130)</div></td>
+      </tr>
+      <tr>
+        <td class="q-standard">Matrix chain multiplication (classic)</td>
+        <td><div class="q-similar">Minimum cost to cut a stick (LC 1547)</div></td>
+      </tr>
+    </table>
+  </div>
+
+  <h3>DP on Strings</h3>
+  <div class="card">
+    <table>
+      <tr><th>Standard anchor</th><th>Similar twist</th></tr>
+      <tr>
+        <td class="q-standard">Longest palindromic subsequence (LC 516)<span class="pill pill-med">Med</span></td>
+        <td><div class="q-similar">Palindromic partitioning II (LC 132) <span class="pill pill-hard">Hard</span></div></td>
+      </tr>
+      <tr>
+        <td class="q-standard">Word break (LC 139)<span class="pill pill-med">Med</span></td>
+        <td><div class="q-similar">Word break II (LC 140) — return all valid sentences <span class="pill pill-hard">Hard</span></div></td>
+      </tr>
+      <tr>
+        <td class="q-standard">Decode ways (LC 91)<span class="pill pill-med">Med</span></td>
+        <td><div class="q-similar">Decode ways II with wildcard * (LC 639)</div></td>
+      </tr>
+    </table>
+  </div>
+
+  <h3>DP on Trees</h3>
+  <div class="card">
+    <table>
+      <tr><th>Standard anchor</th><th>Similar twist</th></tr>
+      <tr>
+        <td class="q-standard">House robber III (LC 337)<span class="pill pill-med">Med</span></td>
+        <td><div class="q-similar">Maximum sum BST in binary tree (LC 1373)</div></td>
+      </tr>
+      <tr>
+        <td class="q-standard">Binary tree cameras (LC 968)<span class="pill pill-hard">Hard</span></td>
+        <td><div class="q-similar">Distribute coins in binary tree (LC 979)</div></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<!-- GRAPHS -->
+<div id="graphs" class="section">
+  <div class="tip-box"><b>Graph confidence formula:</b> BFS/DFS → Cycle detection → Topo sort → Dijkstra → Union-Find → then hard problems. Master this exact order. Don't skip.</div>
+
+  <div class="card">
+    <div class="card-header"><span class="badge badge-teal">BFS Patterns</span></div>
+    <table>
+      <tr><th>Pattern</th><th>Standard anchor</th><th>Similar twist</th></tr>
+      <tr>
+        <td>Multi-source BFS</td>
+        <td class="q-standard">01 Matrix (LC 542)<span class="pill pill-med">Med</span></td>
+        <td><div class="q-similar">Walls and gates (LC 286), Rotting oranges (LC 994)</div></td>
+      </tr>
+      <tr>
+        <td>BFS levels</td>
+        <td class="q-standard">Word ladder (LC 127)<span class="pill pill-hard">Hard</span></td>
+        <td><div class="q-similar">Open the lock (LC 752), Minimum genetic mutation (LC 433)</div></td>
+      </tr>
+      <tr>
+        <td>BFS on grid</td>
+        <td class="q-standard">Shortest path in binary matrix (LC 1091)</td>
+        <td><div class="q-similar">Escape the spreading fire (LC 2258) — two BFS combined</div></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="badge badge-purple">DFS Patterns</span></div>
+    <table>
+      <tr><th>Pattern</th><th>Standard anchor</th><th>Similar twist</th></tr>
+      <tr>
+        <td>Island counting</td>
+        <td class="q-standard">Number of islands (LC 200)<span class="pill pill-med">Med</span></td>
+        <td><div class="q-similar">Max area of island (LC 695), Count sub islands (LC 1905)</div></td>
+      </tr>
+      <tr>
+        <td>Cycle detection</td>
+        <td class="q-standard">Course schedule (LC 207) — directed graph<span class="pill pill-med">Med</span></td>
+        <td><div class="q-similar">Find eventual safe states (LC 802)</div></td>
+      </tr>
+      <tr>
+        <td>Connected components</td>
+        <td class="q-standard">Number of provinces (LC 547)</td>
+        <td><div class="q-similar">Number of operations to make network connected (LC 1319)</div></td>
+      </tr>
+      <tr>
+        <td>Flood fill</td>
+        <td class="q-standard">Pacific Atlantic water flow (LC 417)<span class="pill pill-med">Med</span></td>
+        <td><div class="q-similar">Making a large island (LC 827) <span class="pill pill-hard">Hard</span></div></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="badge badge-amber">Topological Sort</span></div>
+    <table>
+      <tr><th>Standard anchor</th><th>Similar twist</th></tr>
+      <tr>
+        <td class="q-standard">Course schedule II (LC 210) — return order<span class="pill pill-med">Med</span></td>
+        <td><div class="q-similar">Alien dictionary (LC 269) — build graph from strings, then topo sort <span class="pill pill-hard">Hard</span></div></td>
+      </tr>
+      <tr>
+        <td class="q-standard">Minimum height trees (LC 310)</td>
+        <td><div class="q-similar">Sequence reconstruction (LC 444) — is unique topo order possible?</div></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="badge badge-blue">Shortest Path</span></div>
+    <table>
+      <tr><th>Algorithm</th><th>Standard anchor</th><th>Similar twist</th></tr>
+      <tr>
+        <td>Dijkstra</td>
+        <td class="q-standard">Network delay time (LC 743)<span class="pill pill-med">Med</span></td>
+        <td><div class="q-similar">Path with minimum effort (LC 1631), Cheapest flights within K stops (LC 787)</div></td>
+      </tr>
+      <tr>
+        <td>Bellman-Ford</td>
+        <td class="q-standard">Cheapest flights within K stops (LC 787)<span class="pill pill-med">Med</span></td>
+        <td><div class="q-similar">Negative weight cycle detection</div></td>
+      </tr>
+      <tr>
+        <td>BFS 0-1</td>
+        <td class="q-standard">Minimum cost to make at least one valid path (LC 1368)<span class="pill pill-hard">Hard</span></td>
+        <td><div class="q-similar">Minimum obstacle removal to reach corner (LC 2290)</div></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="badge badge-coral">Union-Find (DSU)</span></div>
+    <table>
+      <tr><th>Standard anchor</th><th>Similar twist</th></tr>
+      <tr>
+        <td class="q-standard">Redundant connection (LC 684)<span class="pill pill-med">Med</span></td>
+        <td><div class="q-similar">Accounts merge (LC 721) — DSU on strings</div></td>
+      </tr>
+      <tr>
+        <td class="q-standard">Number of islands II (LC 305)<span class="pill pill-hard">Hard</span></td>
+        <td><div class="q-similar">Most stones removed with same row or column (LC 947)</div></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="badge badge-red">Advanced Graph (MAANG level)</span></div>
+    <table>
+      <tr><th>Topic</th><th>Standard anchor</th><th>Similar twist</th></tr>
+      <tr>
+        <td>Bipartite check</td>
+        <td class="q-standard">Is graph bipartite? (LC 785)</td>
+        <td><div class="q-similar">Possible bipartition (LC 886)</div></td>
+      </tr>
+      <tr>
+        <td>MST (Kruskal/Prim)</td>
+        <td class="q-standard">Min cost to connect all points (LC 1584)</td>
+        <td><div class="q-similar">Find critical and pseudo-critical edges in MST (LC 1489)</div></td>
+      </tr>
+      <tr>
+        <td>SCC / Bridges</td>
+        <td class="q-standard">Critical connections in network (LC 1192) — Tarjan's<span class="pill pill-hard">Hard</span></td>
+        <td><div class="q-similar">Find bridges, articulation points</div></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<!-- TREES -->
+<div id="trees" class="section">
+  <div class="tip-box"><b>Trees = recursion practice.</b> Every tree problem is: "solve for left subtree + right subtree + root". Get this reflex and 80% of tree mediums become solvable.</div>
+
+  <div class="card">
+    <div class="card-header"><span class="badge badge-teal">Traversal Patterns</span></div>
+    <table>
+      <tr><th>Pattern</th><th>Standard anchor</th><th>Similar twist</th></tr>
+      <tr>
+        <td>Level-order BFS</td>
+        <td class="q-standard">Binary tree right side view (LC 199)<span class="pill pill-med">Med</span></td>
+        <td><div class="q-similar">Find bottom left tree value (LC 513), Zigzag level order (LC 103)</div></td>
+      </tr>
+      <tr>
+        <td>DFS path tracking</td>
+        <td class="q-standard">Path sum II — all paths (LC 113)<span class="pill pill-med">Med</span></td>
+        <td><div class="q-similar">Path sum III counting paths (LC 437), Binary tree maximum path sum (LC 124)</div></td>
+      </tr>
+      <tr>
+        <td>Inorder property</td>
+        <td class="q-standard">Validate BST (LC 98)<span class="pill pill-med">Med</span></td>
+        <td><div class="q-similar">Recover BST (LC 99) — two nodes swapped</div></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="badge badge-purple">Recursion + Return value</span></div>
+    <table>
+      <tr><th>Standard anchor</th><th>Similar twist</th></tr>
+      <tr>
+        <td class="q-standard">Lowest common ancestor (LC 236)<span class="pill pill-med">Med</span></td>
+        <td><div class="q-similar">LCA of deepest leaves (LC 1123), LCA in BST (LC 235 — simpler)</div></td>
+      </tr>
+      <tr>
+        <td class="q-standard">Diameter of binary tree (LC 543)</td>
+        <td><div class="q-similar">Longest zigzag path (LC 1372), Time needed to inform all employees (LC 1376)</div></td>
+      </tr>
+      <tr>
+        <td class="q-standard">Symmetric tree (LC 101)</td>
+        <td><div class="q-similar">Check if two trees are mirrors, Flip equivalent binary trees (LC 951)</div></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="badge badge-amber">BST Operations</span></div>
+    <table>
+      <tr><th>Standard anchor</th><th>Similar twist</th></tr>
+      <tr>
+        <td class="q-standard">Kth smallest in BST (LC 230)<span class="pill pill-med">Med</span></td>
+        <td><div class="q-similar">BST iterator (LC 173) — inorder lazily</div></td>
+      </tr>
+      <tr>
+        <td class="q-standard">Convert sorted array to BST (LC 108)</td>
+        <td><div class="q-similar">Convert sorted list to BST (LC 109) — linked list, no index access</div></td>
+      </tr>
+      <tr>
+        <td class="q-standard">Delete node in BST (LC 450)</td>
+        <td><div class="q-similar">Insert into BST (LC 701), Trim BST (LC 669)</div></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="badge badge-blue">Construction / Serialization</span></div>
+    <table>
+      <tr><th>Standard anchor</th><th>Similar twist</th></tr>
+      <tr>
+        <td class="q-standard">Construct tree from preorder+inorder (LC 105)<span class="pill pill-med">Med</span></td>
+        <td><div class="q-similar">Construct from postorder+inorder (LC 106), from preorder only if BST (LC 1008)</div></td>
+      </tr>
+      <tr>
+        <td class="q-standard">Serialize and deserialize binary tree (LC 297)<span class="pill pill-hard">Hard</span></td>
+        <td><div class="q-similar">Serialize BST (LC 449) — more compact encoding possible</div></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="badge badge-coral">Trie (must know for MAANG)</span></div>
+    <table>
+      <tr><th>Standard anchor</th><th>Similar twist</th></tr>
+      <tr>
+        <td class="q-standard">Implement Trie (LC 208)</td>
+        <td><div class="q-similar">Add and search word (LC 211) — wildcard '.'</div></td>
+      </tr>
+      <tr>
+        <td class="q-standard">Word search II (LC 212)<span class="pill pill-hard">Hard</span></td>
+        <td><div class="q-similar">Replace words (LC 648), Map sum pairs (LC 677)</div></td>
+      </tr>
+      <tr>
+        <td class="q-standard">Maximum XOR of two numbers (LC 421)</td>
+        <td><div class="q-similar">Maximum XOR with element from array (LC 1707)</div></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<!-- LLD -->
+<div id="lld" class="section">
+  <div class="tip-box"><b>Your LLD issue is specific:</b> 2-2.5 hours is too long because you're not using a structured 45-min framework. Here's the exact process to cut that time in half.</div>
+
+  <div class="card">
+    <div class="card-header"><span class="badge badge-purple">The 45-Minute LLD Framework</span></div>
+    <div class="lld-step">
+      <div class="lld-num">1</div>
+      <div class="lld-content">
+        <div class="lld-title">Requirements clarification (5 min)</div>
+        <div class="lld-desc">Ask: who are the actors? What are the core 3-4 use cases? Any constraints (concurrent users, read-heavy vs write-heavy)? Write them down visibly. Don't skip this — edge cases come from unclear requirements.</div>
+      </div>
+    </div>
+    <div class="lld-step">
+      <div class="lld-num">2</div>
+      <div class="lld-content">
+        <div class="lld-title">Core entities / nouns (5 min)</div>
+        <div class="lld-desc">List all nouns from the problem: User, Booking, Vehicle, Payment, Notification. These become your classes. Cross out any that are just attributes (color, price = attributes of Vehicle, not separate classes).</div>
+      </div>
+    </div>
+    <div class="lld-step">
+      <div class="lld-num">3</div>
+      <div class="lld-content">
+        <div class="lld-title">Relationships (5 min)</div>
+        <div class="lld-desc">For each pair: Is it association (HAS-A)? Inheritance (IS-A)? Composition (owned lifecycle)? Aggregation (independent lifecycle)? Draw arrows — solid for association, hollow triangle for inheritance.</div>
+      </div>
+    </div>
+    <div class="lld-step">
+      <div class="lld-num">4</div>
+      <div class="lld-content">
+        <div class="lld-title">Class diagram with methods (15 min)</div>
+        <div class="lld-desc">For each class: 3-5 key attributes, 2-3 key methods. Don't go beyond this in an interview. Use enums for states (BookingStatus: PENDING, CONFIRMED, CANCELLED). Use interfaces for behaviors (Payable, Notifiable).</div>
+      </div>
+    </div>
+    <div class="lld-step">
+      <div class="lld-num">5</div>
+      <div class="lld-content">
+        <div class="lld-title">Design patterns application (10 min)</div>
+        <div class="lld-desc">Apply 1-2 patterns that genuinely fit. Don't force all patterns. Common fits: Strategy (payment methods), Observer (notifications), Factory (vehicle/room type creation), Singleton (config/DB connection).</div>
+      </div>
+    </div>
+    <div class="lld-step">
+      <div class="lld-num">6</div>
+      <div class="lld-content">
+        <div class="lld-title">Edge cases walk-through (5 min)</div>
+        <div class="lld-desc">Concurrent booking? Cancellation mid-payment? User deletes account? Walk through 2-3 scenarios using your design. This is what interviewers love to probe.</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Must-Practice LLD Questions (standard → similar)</h3>
+  <div class="card">
+    <table>
+      <tr><th>Standard LLD</th><th>Similar twist</th><th>Key pattern</th></tr>
+      <tr>
+        <td class="q-standard">Parking Lot</td>
+        <td><div class="q-similar">Airport check-in system, Movie theater booking</div></td>
+        <td style="font-size:12px;color:var(--color-text-secondary)">Strategy (pricing), Factory (spot type), Observer (status)</td>
+      </tr>
+      <tr>
+        <td class="q-standard">Library Management System</td>
+        <td><div class="q-similar">Hotel booking system, Gym membership management</div></td>
+        <td style="font-size:12px;color:var(--color-text-secondary)">State machine (book/member status), Observer</td>
+      </tr>
+      <tr>
+        <td class="q-standard">Elevator System</td>
+        <td><div class="q-similar">Traffic light system, Vending machine</div></td>
+        <td style="font-size:12px;color:var(--color-text-secondary)">State pattern, Strategy (scheduling algorithm)</td>
+      </tr>
+      <tr>
+        <td class="q-standard">Chess game</td>
+        <td><div class="q-similar">Tic-tac-toe, Snake & Ladder, Ludo</div></td>
+        <td style="font-size:12px;color:var(--color-text-secondary)">Factory (pieces), Command (moves), Observer (win check)</td>
+      </tr>
+      <tr>
+        <td class="q-standard">ATM machine</td>
+        <td><div class="q-similar">Vending machine, Food delivery order flow</div></td>
+        <td style="font-size:12px;color:var(--color-text-secondary)">State pattern, Chain of responsibility</td>
+      </tr>
+      <tr>
+        <td class="q-standard">Ride-sharing (Uber)</td>
+        <td><div class="q-similar">Food delivery (Swiggy), Courier tracking</div></td>
+        <td style="font-size:12px;color:var(--color-text-secondary)">Observer, Strategy (driver matching), State machine</td>
+      </tr>
+      <tr>
+        <td class="q-standard">Rate limiter</td>
+        <td><div class="q-similar">API gateway, Circuit breaker pattern</div></td>
+        <td style="font-size:12px;color:var(--color-text-secondary)">Token bucket, Sliding window counter</td>
+      </tr>
+    </table>
+  </div>
+
+  <h3>Design Patterns You Must Know (Java)</h3>
+  <div class="card">
+    <table>
+      <tr><th>Pattern</th><th>When to use</th><th>LLD problem it fits</th></tr>
+      <tr><td>Singleton</td><td style="font-size:12px">DB connection, Config, Logger</td><td style="font-size:12px">Almost every system</td></tr>
+      <tr><td>Factory / Abstract Factory</td><td style="font-size:12px">Create objects without specifying class</td><td style="font-size:12px">Parking lot (spot types), Chess (pieces)</td></tr>
+      <tr><td>Strategy</td><td style="font-size:12px">Interchangeable algorithms at runtime</td><td style="font-size:12px">Payment methods, Sorting, Driver matching</td></tr>
+      <tr><td>Observer</td><td style="font-size:12px">One-to-many event notification</td><td style="font-size:12px">Booking confirmation, Stock price alerts</td></tr>
+      <tr><td>Decorator</td><td style="font-size:12px">Add behavior without subclassing</td><td style="font-size:12px">Pizza toppings, Logger with timestamps</td></tr>
+      <tr><td>Builder</td><td style="font-size:12px">Complex object construction step-by-step</td><td style="font-size:12px">Query builder, Report generation</td></tr>
+      <tr><td>State</td><td style="font-size:12px">Object behavior changes with state</td><td style="font-size:12px">Elevator, ATM, Traffic light</td></tr>
+      <tr><td>Command</td><td style="font-size:12px">Encapsulate operations (undo/redo)</td><td style="font-size:12px">Text editor, Chess moves</td></tr>
+    </table>
+  </div>
+
+  <div class="card" style="border-color:#7F77DD">
+    <div class="card-header"><span class="badge badge-purple">Resources (best for 2026)</span></div>
+    <div style="font-size:13px;line-height:2">
+      <div>• <b>Refactoring Guru</b> — refactoring.guru/design-patterns (best visual explanations)</div>
+      <div>• <b>GitHub: prasadgujar/low-level-design-primer</b> — Java implementations of all standard LLD problems</div>
+      <div>• <b>Concept && Coding YouTube</b> — Shrayansh Jain's LLD playlist (best for Indian interviews, 2024-25)</div>
+      <div>• <b>Head First Design Patterns</b> — read chapters 1, 2, 5, 8, 9 only (skip others initially)</div>
+    </div>
+  </div>
+</div>
+
+<!-- REVISION STRATEGY -->
+<div id="revision" class="section">
+  <div class="tip-box"><b>Why revision fails:</b> You re-read or re-watch solutions. That gives you the illusion of knowing. Real revision = solving from scratch, explaining out loud, and identifying the exact moment you got stuck.</div>
+
+  <div class="card">
+    <div class="card-header"><span class="badge badge-purple">Spaced Repetition System (do this)</span></div>
+    <table>
+      <tr><th>When</th><th>What to do</th></tr>
+      <tr><td style="white-space:nowrap">Day 0</td><td>Solve problem. Note: pattern name, key insight, where you got stuck.</td></tr>
+      <tr><td style="white-space:nowrap">Day 1</td><td>Re-solve from memory in 15 min. Don't look at code. Only check if you got stuck.</td></tr>
+      <tr><td style="white-space:nowrap">Day 3</td><td>Re-solve again. Should feel automatic now. If not — flag it as "weak problem".</td></tr>
+      <tr><td style="white-space:nowrap">Day 7</td><td>Only weak problems. Explain the approach out loud (rubber duck).</td></tr>
+      <tr><td style="white-space:nowrap">Weekly Sunday</td><td>Pick 3 random solved problems. Re-solve cold. Track pass/fail rate.</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="badge badge-teal">Pattern Journal (keep this)</span></div>
+    <div style="font-size:13px;line-height:1.8">
+      For every problem you solve, write 3 lines in a Notion/paper journal:
+      <div style="margin-top:8px;background:var(--color-background-secondary);padding:10px;border-radius:8px;font-family:var(--font-mono);font-size:12px;line-height:1.8">
+        Problem: Subarray sum = K (LC 560)<br>
+        Pattern: Prefix sum + HashMap<br>
+        Key insight: If prefix[j] - prefix[i] = K, then count += freq[prefix[j] - K]<br>
+        Edge case: Empty subarray → initialize freq[0] = 1
+      </div>
+      <div style="margin-top:8px">Review this journal before every mock interview. 200 entries = your entire DSA brain externalized.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="badge badge-amber">What to do when you're stuck in interview</span></div>
+    <div style="font-size:13px;line-height:1.8">
+      <div style="padding:3px 0"><b>1.</b> Say the brute force first — always. Even O(n³). Never sit silent.</div>
+      <div style="padding:3px 0"><b>2.</b> Think about what's repeated — "if we computed X already, do we need to compute it again?" → DP or memoization</div>
+      <div style="padding:3px 0"><b>3.</b> Think about sorted order — "if array were sorted, would it be easier?" → two pointer or binary search</div>
+      <div style="padding:3px 0"><b>4.</b> Think about monotonicity — "do I need the previous max/min seen?" → stack or deque</div>
+      <div style="padding:3px 0"><b>5.</b> Draw a small example on paper/whiteboard and trace manually</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="badge badge-coral">Confidence Building (your specific problem)</span></div>
+    <div style="font-size:13px;line-height:1.8">
+      You said you freeze on new problems. Here's the drill: every Sunday, pick 1 problem you've <i>never seen</i> and attempt it <i>without</i> any hints for 35 minutes. Record:<br><br>
+      <div style="padding:4px 0">• Did you identify the pattern? (Y/N)</div>
+      <div style="padding:4px 0">• Did you write a working solution? (Y/N)</div>
+      <div style="padding:4px 0">• Time taken?</div>
+      <div style="margin-top:8px">Track this weekly. You'll see pattern recognition speed increase after week 4. That metric is your real interview readiness signal — not how many questions you've solved.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="badge badge-blue">Company-Specific Focus</span></div>
+    <table>
+      <tr><th>Company type</th><th>High frequency topics</th></tr>
+      <tr><td>Amazon</td><td style="font-size:12px">Arrays, Strings, Trees, Graphs, DP (medium), BFS/DFS, Leadership principle questions</td></tr>
+      <tr><td>Google</td><td style="font-size:12px">Hard DP, Graph, Binary Search on answer, Math problems, Segment trees</td></tr>
+      <tr><td>Microsoft</td><td style="font-size:12px">Trees, Strings, Arrays, medium DP, some design questions</td></tr>
+      <tr><td>Indian unicorns (Swiggy/Zepto/Groww)</td><td style="font-size:12px">Arrays, Sliding window, Heap, Two pointer, LLD is heavy here</td></tr>
+      <tr><td>Atlassian / Salesforce India</td><td style="font-size:12px">String processing, Graph, medium DP, strong LLD round</td></tr>
+    </table>
+  </div>
+</div>
+    </div>
+    <script>
+function show(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+  </body>
+</html>
+
+
