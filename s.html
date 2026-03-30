@@ -1,0 +1,573 @@
+
+<html>
+
+
+
+<head>  <title>DSA & LLD Roadmap</title>
+  <link rel="stylesheet" href="s.css">
+</head>
+<body>
+<div class="tabs">
+  <button class="tab active" onclick="show('why')">Root cause</button>
+  <button class="tab" onclick="show('framework')">The 5-Q Framework</button>
+  <button class="tab" onclick="show('signals')">Pattern signals (DSA)</button>
+  <button class="tab" onclick="show('dp-signals')">DP signals</button>
+  <button class="tab" onclick="show('graph-signals')">Graph signals</button>
+  <button class="tab" onclick="show('tree-signals')">Tree signals</button>
+  <button class="tab" onclick="show('drill')">Training drill</button>
+</div>
+
+<div id="why" class="section active">
+  <div class="tip"><b>The actual diagnosis:</b> You've been learning patterns by example. You can recognize the exact problems you've seen. But recognition by memory is not the same as detection by logic. You need to switch from "does this look like problem X" to "what properties does this problem have, and which pattern owns those properties."</div>
+
+  <div class="card">
+    <h3>Why repeated practice on same problems doesn't transfer</h3>
+    <div class="decision-step">
+      <div class="ds-num">1</div>
+      <div class="ds-body"><div class="ds-q">You see Subarray Sum = K → you remember prefix sum.</div><div class="ds-a">But you learned "Subarray Sum = K uses prefix sum" not "problems that ask for count of subarrays with a property, use prefix sum + hashmap." The rule is too narrow.</div></div>
+    </div>
+    <div class="decision-step">
+      <div class="ds-num">2</div>
+      <div class="ds-body"><div class="ds-q">LeetCode throws "Count subarrays with product less than K."</div><div class="ds-a">Same underlying idea (sliding window or prefix product), different surface. You freeze because it doesn't look like the problem you memorized.</div></div>
+    </div>
+    <div class="decision-step">
+      <div class="ds-num">3</div>
+      <div class="ds-body"><div class="ds-q">The fix is not more problems. The fix is abstraction.</div><div class="ds-a">You need to learn the abstract "shape" of each pattern — what structural properties does the problem have when a pattern applies? That shape detection works on any new problem.</div></div>
+    </div>
+  </div>
+
+  <div class="table-wrapper">
+    <h3>The two kinds of pattern learners</h3>
+    <table>
+      <tr><th>Surface learner (you right now)</th><th>Deep learner (target)</th></tr>
+      <tr><td style="font-size:12px;color:var(--color-text-secondary)">"Subarray Sum K → prefix sum"</td><td style="font-size:12px;color:var(--color-text-secondary)">"Count of pairs with sum = target in a continuous sequence → prefix sum + hashmap, because I need to know how many prefixes I've seen before"</td></tr>
+      <tr><td style="font-size:12px;color:var(--color-text-secondary)">"Course schedule → topo sort"</td><td style="font-size:12px;color:var(--color-text-secondary)">"Any problem with dependencies where I need to find order, or detect circular dependency → model as directed graph, topo sort if DAG"</td></tr>
+      <tr><td style="font-size:12px;color:var(--color-text-secondary)">"Longest common subsequence → 2D DP"</td><td style="font-size:12px;color:var(--color-text-secondary)">"Any problem comparing two sequences where I need to find optimal matching/alignment → 2D DP because state = (position in seq1, position in seq2)"</td></tr>
+      <tr><td style="font-size:12px;color:var(--color-text-secondary)">"Koko eating bananas → binary search on answer"</td><td style="font-size:12px;color:var(--color-text-secondary)">"Any problem where answer is a monotonic value in some range, and I can check feasibility of a candidate answer in O(n) → binary search on the answer space"</td></tr>
+    </table>
+    <div style="margin-top:10px;font-size:12px;color:var(--color-text-secondary)">The deep learner sees a new problem and runs structural analysis. The surface learner tries to find a matching problem they've seen before.</div>
+  </div>
+</div>
+
+<div id="framework" class="section">
+  <div class="tip"><b>Run these 5 questions on every new problem. In order. Every time.</b> This is your detection protocol. After 30 problems with this protocol, it becomes reflex.</div>
+
+  <div class="card">
+    <div class="decision-step">
+      <div class="ds-num">1</div>
+      <div class="ds-body">
+        <div class="ds-q">Q1: What is the input shape?</div>
+        <div class="ds-a">
+          Array (sorted? unsorted?) → Binary search, two pointer, sliding window candidates<br>
+          String → Sliding window, hashing, DP on strings, Trie<br>
+          Graph / adjacency list → BFS, DFS, Dijkstra, Union-Find<br>
+          Tree → Recursion, DFS, BFS level-order<br>
+          Two sequences → 2D DP (LCS family)<br>
+          Grid (matrix) → BFS flood fill, DFS, DP on grid<br>
+          Set of items with weights/values → Knapsack DP
+        </div>
+      </div>
+    </div>
+    <div class="decision-step">
+      <div class="ds-num">2</div>
+      <div class="ds-body">
+        <div class="ds-q">Q2: What is the question actually asking?</div>
+        <div class="ds-a">
+          Count something → Prefix sum, hashmap, DP counting<br>
+          Find min/max → DP optimization, greedy, Dijkstra<br>
+          Find all (enumerate) → Backtracking<br>
+          Is it possible / valid? → BFS/DFS reachability, Union-Find connectivity<br>
+          Find order / sequence → Topo sort<br>
+          Find kth element → Heap, QuickSelect<br>
+          Detect cycle → Floyd's, DFS with color, Union-Find
+        </div>
+      </div>
+    </div>
+    <div class="decision-step">
+      <div class="ds-num">3</div>
+      <div class="ds-body">
+        <div class="ds-q">Q3: Are there constraints I should exploit?</div>
+        <div class="ds-a">
+          "Subarray" or "contiguous" → Sliding window or prefix sum (not backtracking)<br>
+          "Subsequence" (not contiguous) → DP or two pointer<br>
+          "Sorted input" → Binary search, two pointer<br>
+          "No extra space" → In-place techniques, Floyd's<br>
+          "Distinct / unique" → Hashset<br>
+          "At most K" or "exactly K" → Sliding window with constraint<br>
+          "All permutations / combinations" → Backtracking<br>
+          "Minimum cost to connect" → MST (Kruskal/Prim)<br>
+          "Shortest path with weights" → Dijkstra / Bellman-Ford
+        </div>
+      </div>
+    </div>
+    <div class="decision-step">
+      <div class="ds-num">4</div>
+      <div class="ds-body">
+        <div class="ds-q">Q4: Can I define "optimal substructure"?</div>
+        <div class="ds-a">
+          Ask yourself: "If I knew the answer for a smaller version of this problem, could I build the answer for the full problem?"<br><br>
+          YES → DP or recursion + memo. Now define: what is the smallest subproblem? That is your dp[i] state.<br>
+          NO → Greedy or direct simulation is likely enough.<br><br>
+          This single question is the entire secret to knowing when to use DP.
+        </div>
+      </div>
+    </div>
+    <div class="decision-step">
+      <div class="ds-num">5</div>
+      <div class="ds-body">
+        <div class="ds-q">Q5: What is the brute force, and what is wasteful in it?</div>
+        <div class="ds-a">
+          Always write brute force first mentally.<br>
+          Then ask: "What am I recomputing over and over?"<br><br>
+          If you recompute overlapping subproblems → Memoize → DP<br>
+          If you recompute prefix sums → Store in hashmap<br>
+          If you linearly scan for next greater/smaller → Use a monotonic stack<br>
+          If you repeatedly find min/max → Use a heap<br>
+          If you search in a sorted space → Binary search<br><br>
+          The optimization is always about eliminating the redundant work in brute force.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Apply this to a real example — "minimum path sum in a grid"</h3>
+    <div class="mono">
+Q1: Input shape → 2D grid (matrix). Candidates: grid DP, BFS.<br>
+Q2: Question → find minimum (optimization). Greedy or DP.<br>
+Q3: Constraints → "top-left to bottom-right, only right/down moves" — no branching choices, strict direction.<br>
+Q4: Optimal substructure → min path to (i,j) = min(path to (i-1,j), path to (i,j-1)) + grid[i][j]. YES → DP.<br>
+Q5: Brute force recomputes same cells → memoize each cell's min path.<br>
+<br>
+Result: 2D DP, dp[i][j] = grid[i][j] + min(dp[i-1][j], dp[i][j-1]).
+    </div>
+    <div style="font-size:12px;color:var(--color-text-secondary);margin-top:6px">You didn't need to remember this problem. You derived the pattern from the structure.</div>
+  </div>
+</div>
+
+<div id="signals" class="section">
+  <div class="tip"><b>These are the structural signals</b> — properties of the problem, not keywords in the title. Train yourself to notice these in the first 2 minutes of reading any problem.</div>
+
+  <h3>Signal → Pattern mapping</h3>
+
+  <div class="signal-box">
+    <div class="signal-title">Signal: "contiguous subarray" + "find count/length/sum"</div>
+    <div class="signal-body">
+      <span class="badge b-p">Sliding Window</span> when you need max/min length or a condition over a window<br>
+      <span class="badge b-t">Prefix Sum + HashMap</span> when you need to count subarrays with exact target sum<br>
+      Key difference: "at most K" → sliding window. "exactly K" → prefix sum.
+    </div>
+  </div>
+
+  <div class="signal-box teal">
+    <div class="signal-title">Signal: sorted input OR problem asks to "minimize the maximum" or "maximize the minimum"</div>
+    <div class="signal-body">
+      <span class="badge b-b">Binary Search</span> — specifically binary search on the answer space.<br>
+      The trick: if you can check "is X a feasible answer?" in O(n), and the answer space is monotonic, binary search on it.<br>
+      Examples: Koko bananas, split array largest sum, capacity to ship packages — all same skeleton.
+    </div>
+  </div>
+
+  <div class="signal-box amber">
+    <div class="signal-title">Signal: "next greater", "previous smaller", "span", "histogram"</div>
+    <div class="signal-body">
+      <span class="badge b-a">Monotonic Stack</span><br>
+      Maintain a stack that is always sorted (increasing or decreasing). When you break the order, pop and process.<br>
+      If it's about a range/window maximum → <span class="badge b-a">Monotonic Deque</span>
+    </div>
+  </div>
+
+  <div class="signal-box coral">
+    <div class="signal-title">Signal: "k-th largest/smallest", "top K", "median", "streaming data"</div>
+    <div class="signal-body">
+      <span class="badge b-c">Heap (PriorityQueue)</span><br>
+      Two heaps for median. Min-heap for top K largest. Max-heap for K smallest.<br>
+      If it's "merge K sorted" → heap with (value, list_index, element_index).
+    </div>
+  </div>
+
+  <div class="signal-box blue">
+    <div class="signal-title">Signal: "all subsets", "all permutations", "all paths", "generate all valid combinations"</div>
+    <div class="signal-body">
+      <span class="badge b-b">Backtracking</span><br>
+      Template: choose → recurse → unchoose. Add pruning when constraint is violated.<br>
+      Key: if problem asks for COUNT of valid combinations, switch to DP (backtracking is exponential).
+    </div>
+  </div>
+
+  <div class="signal-box red">
+    <div class="signal-title">Signal: "overlapping intervals", "meeting rooms", "events with start/end"</div>
+    <div class="signal-body">
+      <span class="badge b-r">Intervals — sort by start</span><br>
+      Merge: iterate and compare end of last vs start of current.<br>
+      Count max overlap: sweep line with events array or min-heap of end times.<br>
+      Insert: binary search for position, then merge.
+    </div>
+  </div>
+
+  <div class="signal-box green">
+    <div class="signal-title">Signal: "find duplicate", "detect cycle in linked list", "missing number"</div>
+    <div class="signal-body">
+      <span class="badge b-g">Floyd's / XOR / Index-as-hashmap</span><br>
+      No extra space → Floyd's tortoise and hare for cycle.<br>
+      Missing/duplicate in range [1..n] → index marking or XOR trick.
+    </div>
+  </div>
+
+  <div class="sep"></div>
+  <h3>The "at most K" vs "exactly K" signal — most misused pattern</h3>
+  <div class="card">
+    <div class="mono">
+"at most K distinct chars"       → shrinkable sliding window (expand right, shrink left when violated)<br>
+"exactly K distinct chars"       → f(exactly K) = f(at most K) - f(at most K-1)  [TWO window calls!]<br>
+"at most K replacements"         → sliding window (LC 424 longest repeating char replacement)<br>
+"exactly K operations allowed"   → usually DP with state (index, k_remaining)
+    </div>
+    <div style="font-size:12px;color:var(--color-text-secondary);margin-top:6px">This single distinction explains why you solve "at most K" correctly but freeze on "exactly K".</div>
+  </div>
+</div>
+
+<div id="dp-signals" class="section">
+  <div class="tip"><b>DP signal detection is all about identifying what changes between subproblems.</b> That "thing that changes" is your state. Once you have the state, the recurrence almost writes itself.</div>
+
+  <div class="signal-box">
+    <div class="signal-title">Signal: "how many ways to reach / make / partition"</div>
+    <div class="signal-body">
+      <span class="badge b-p">Counting DP</span> — dp[i] = number of ways<br>
+      Coin change II, unique paths, target sum, stair climbing.<br>
+      Recurrence: dp[i] += dp[i - something] for each valid choice.
+    </div>
+  </div>
+
+  <div class="signal-box teal">
+    <div class="signal-title">Signal: "minimum/maximum cost / length / deletions to achieve X"</div>
+    <div class="signal-body">
+      <span class="badge b-t">Optimization DP</span> — dp[i] = min or max value<br>
+      Edit distance, coin change (min coins), longest increasing subsequence (LIS → max length).<br>
+      Recurrence: dp[i] = min/max(dp[j] + cost) for valid j.
+    </div>
+  </div>
+
+  <div class="signal-box amber">
+    <div class="signal-title">Signal: TWO sequences being compared / aligned / matched</div>
+    <div class="signal-body">
+      <span class="badge b-a">2D DP — LCS family</span><br>
+      State: dp[i][j] = answer considering first i chars of s1 and first j chars of s2.<br>
+      LCS, Edit distance, Wildcard matching, Distinct subsequences, Interleaving strings.<br>
+      Base cases: dp[0][j] = j (deletions), dp[i][0] = i (insertions).
+    </div>
+  </div>
+
+  <div class="signal-box coral">
+    <div class="signal-title">Signal: "partition array into two equal halves" or "can we pick items summing to X"</div>
+    <div class="signal-body">
+      <span class="badge b-c">0/1 Knapsack</span><br>
+      Each item can be taken or left. dp[j] = can we achieve sum j?<br>
+      Partition equal subset (LC 416), Last stone weight II (LC 1049), Target sum.<br>
+      Run backwards when using 1D array to avoid reusing same item.
+    </div>
+  </div>
+
+  <div class="signal-box blue">
+    <div class="signal-title">Signal: "interval" — problem defined on subarray [i..j] where answer for [i..j] depends on answers for smaller intervals</div>
+    <div class="signal-body">
+      <span class="badge b-b">Interval DP</span><br>
+      State: dp[i][j] = answer for subarray from index i to j.<br>
+      Fill diagonally: length 1 first, then 2, then 3... up to full length.<br>
+      Burst balloons, minimum cost to cut stick, palindrome partitioning.
+    </div>
+  </div>
+
+  <div class="signal-box red">
+    <div class="signal-title">Signal: "at each position, decide include/skip with some restriction on adjacent"</div>
+    <div class="signal-body">
+      <span class="badge b-r">Decision DP — House Robber family</span><br>
+      dp[i] = best you can do considering first i elements.<br>
+      dp[i] = max(dp[i-1], dp[i-2] + nums[i]).<br>
+      Circular → run twice: [0..n-2] and [1..n-1], take max. On tree → DFS returning (take, skip).
+    </div>
+  </div>
+
+  <div class="signal-box green">
+    <div class="signal-title">Signal: "longest increasing subsequence" style — find longest chain where each element satisfies a condition with the previous</div>
+    <div class="signal-body">
+      <span class="badge b-g">LIS pattern</span><br>
+      O(n²) DP or O(n log n) with patience sorting / binary search.<br>
+      Applies to: LIS (LC 300), Russian doll envelopes (LC 354), longest chain of pairs.<br>
+      Key: sort by one dimension, LIS on the other.
+    </div>
+  </div>
+
+  <div class="sep"></div>
+  <h3>How to define dp state when stuck</h3>
+  <div class="card">
+    <div class="mono">
+Step 1: Ask "what would I need to know at position i to make the optimal decision?"<br>
+Step 2: Everything you "need to know" becomes dimensions of your state.<br>
+Step 3: If state has 1 thing → 1D dp[i]. If 2 things → 2D dp[i][j].<br>
+<br>
+Example: "Longest path in grid where each step must be strictly increasing"<br>
+At cell (i,j): I need to know → which cell I'm at. That's it → dp[i][j] = longest path starting from (i,j).<br>
+<br>
+Example: "Min cost with at most K transactions (stocks)"<br>
+At day i with k transactions left: I need → (day, k, holding or not) → dp[i][k][0/1].
+    </div>
+  </div>
+</div>
+
+<div id="graph-signals" class="section">
+  <div class="tip"><b>Graph pattern detection starts with one question: "What is a node, and what is an edge?"</b> Many problems are secretly graph problems once you model them correctly. If you can't answer this, you haven't modeled the problem yet.</div>
+
+  <div class="signal-box">
+    <div class="signal-title">Signal: "find all connected components" or "how many groups" or "are A and B in the same group"</div>
+    <div class="signal-body">
+      <span class="badge b-p">DFS / BFS component counting</span> OR <span class="badge b-p">Union-Find (DSU)</span><br>
+      Use DSU when: unions happen online (one at a time), you need fast "same group?" queries.<br>
+      Use BFS/DFS when: you need to process/label each component's members.<br>
+      Examples: Number of islands, Number of provinces, Accounts merge.
+    </div>
+  </div>
+
+  <div class="signal-box teal">
+    <div class="signal-title">Signal: "shortest path" — unweighted graph</div>
+    <div class="signal-body">
+      <span class="badge b-t">BFS — always BFS for unweighted shortest path</span><br>
+      BFS guarantees shortest path in unweighted graphs because each level = one more edge.<br>
+      Multi-source BFS: put ALL sources in queue at start, they expand simultaneously.<br>
+      Examples: 01 Matrix, Rotting oranges, Word ladder.
+    </div>
+  </div>
+
+  <div class="signal-box amber">
+    <div class="signal-title">Signal: "shortest path" — weighted graph with non-negative weights</div>
+    <div class="signal-body">
+      <span class="badge b-a">Dijkstra</span> — min-heap + visited set.<br>
+      State in heap: (cost, node). Process cheapest first.<br>
+      Variant: if edge weights are 0 or 1 only → use deque (0-1 BFS), O(V+E) instead of O(E log V).<br>
+      Examples: Network delay time, Path with minimum effort, Cheapest flights (with K stop constraint → Bellman-Ford).
+    </div>
+  </div>
+
+  <div class="signal-box coral">
+    <div class="signal-title">Signal: "dependencies" / "prerequisites" / "ordering" / "can we finish all tasks"</div>
+    <div class="signal-body">
+      <span class="badge b-c">Topological Sort (Kahn's BFS or DFS)</span><br>
+      Model: tasks = nodes, dependency A→B = directed edge.<br>
+      If cycle exists → impossible (return empty).<br>
+      Kahn's: start from nodes with in-degree 0, process one layer at a time.<br>
+      Examples: Course schedule, Alien dictionary, Sequence reconstruction.
+    </div>
+  </div>
+
+  <div class="signal-box blue">
+    <div class="signal-title">Signal: "minimum cost to connect all nodes" or "minimum spanning tree"</div>
+    <div class="signal-body">
+      <span class="badge b-b">Kruskal (sort edges + DSU)</span> or <span class="badge b-b">Prim (heap-based)</span><br>
+      Kruskal: sort all edges by weight, add edge if it connects two different components.<br>
+      Examples: Min cost to connect all points (LC 1584), Optimize water distribution.<br>
+      Not Dijkstra — Dijkstra finds shortest path from source, MST connects all nodes.
+    </div>
+  </div>
+
+  <div class="signal-box red">
+    <div class="signal-title">Signal: "can we color graph with 2 colors" or "split into two groups with no internal conflict"</div>
+    <div class="signal-body">
+      <span class="badge b-r">Bipartite check — BFS/DFS coloring</span><br>
+      Try to 2-color with BFS. If neighbor has same color → not bipartite.<br>
+      Examples: Is graph bipartite (LC 785), Possible bipartition (LC 886).<br>
+      Equivalent: can you separate nodes into two sets where all edges cross between sets?
+    </div>
+  </div>
+
+  <div class="signal-box green">
+    <div class="signal-title">Signal: "the problem is NOT a graph but can be MODELED as one"</div>
+    <div class="signal-body">
+      This is the hardest detection. Non-obvious graph problems:<br>
+      Word ladder: words = nodes, 1-char-different = edge → BFS<br>
+      Open the lock: each lock state = node, one turn = edge → BFS<br>
+      Escape the maze: position = node, each move = edge → BFS<br>
+      Gene mutation: gene string = node, one mutation = edge → BFS<br>
+      <b>Pattern: if the "state" changes step by step and you want min steps → model as BFS on state space.</b>
+    </div>
+  </div>
+
+  <div class="sep"></div>
+  <h3>DFS color states — critical for cycle detection</h3>
+  <div class="card">
+    <div class="mono">
+WHITE (0) = not visited<br>
+GRAY  (1) = currently in recursion stack (being processed)<br>
+BLACK (2) = fully processed<br>
+<br>
+Cycle in DIRECTED graph: if you visit a GRAY node → cycle exists.<br>
+(Visiting a BLACK node is fine — it's already been processed.)<br>
+<br>
+Cycle in UNDIRECTED graph: if you visit any visited node that is NOT your parent → cycle.
+    </div>
+    <div style="font-size:12px;color:var(--color-text-secondary);margin-top:6px">Most people only know "visited = true/false" and get wrong answers on directed graphs. GRAY vs BLACK is the fix.</div>
+  </div>
+</div>
+
+<div id="tree-signals" class="section">
+  <div class="tip"><b>Trees are recursion problems.</b> Every tree problem has one recursive structure: solve for left subtree → solve for right subtree → combine at root. The only question is what you return from each call.</div>
+
+  <div class="signal-box">
+    <div class="signal-title">Signal: "find a value / path / node at a specific depth" or "level-by-level processing"</div>
+    <div class="signal-body">
+      <span class="badge b-p">BFS (level-order)</span> — use queue, process layer by layer.<br>
+      Right side view → take last element of each level.<br>
+      Level averages → sum / count per level.<br>
+      Connect next right pointers → process pairs within each level.
+    </div>
+  </div>
+
+  <div class="signal-box teal">
+    <div class="signal-title">Signal: "path from root to leaf" or "path sum" or "root-to-leaf string"</div>
+    <div class="signal-body">
+      <span class="badge b-t">DFS with running state passed down</span><br>
+      Pass current path / current sum as parameter going DOWN the tree.<br>
+      At leaf: check if condition is met.<br>
+      Examples: Path sum II, root-to-leaf numbers, binary watch.
+    </div>
+  </div>
+
+  <div class="signal-box amber">
+    <div class="signal-title">Signal: "any path" (not necessarily root-to-leaf) or "diameter" or "maximum path sum"</div>
+    <div class="signal-body">
+      <span class="badge b-a">DFS returning value UP + tracking global answer</span><br>
+      At each node: compute best you can extend upward (return to parent), but also check if the node can be the "peak" of a path going left-through-root-right.<br>
+      This "left + root + right" combination is the answer candidate — update global max.<br>
+      Return only the single-branch extension to parent.<br>
+      Examples: Diameter (LC 543), Max path sum (LC 124), Longest zigzag.
+    </div>
+  </div>
+
+  <div class="signal-box coral">
+    <div class="signal-title">Signal: "Lowest Common Ancestor" of two nodes</div>
+    <div class="signal-body">
+      <span class="badge b-c">Post-order DFS</span><br>
+      Key insight: LCA is the first node where p and q are in different subtrees (or one of them IS the node).<br>
+      If left subtree found one and right subtree found the other → current node is LCA.<br>
+      If both found in one subtree → LCA is deeper (return that result up).<br>
+      For BST: if both < root → go left. If both > root → go right. Otherwise root is LCA.
+    </div>
+  </div>
+
+  <div class="signal-box blue">
+    <div class="signal-title">Signal: "construct tree from traversal" or "serialize/deserialize"</div>
+    <div class="signal-body">
+      <span class="badge b-b">Preorder + Inorder → construct</span><br>
+      First element of preorder = root. Find root in inorder → left/right split.<br>
+      Key: use hashmap for O(1) index lookup in inorder array.<br>
+      Serialize with preorder (or level-order with nulls). Deserialize: reconstruct same way.
+    </div>
+  </div>
+
+  <div class="signal-box red">
+    <div class="signal-title">Signal: BST problem — "kth smallest/largest", "range sum", "validate", "insert/delete"</div>
+    <div class="signal-body">
+      <span class="badge b-r">Inorder traversal gives sorted order</span><br>
+      Kth smallest: inorder, count till k (or Morris traversal for O(1) space).<br>
+      Validate BST: inorder must be strictly increasing, OR pass (min, max) bounds top-down.<br>
+      Range sum: if root < low → go right only. If root > high → go left only. Both sides otherwise.
+    </div>
+  </div>
+
+  <div class="sep"></div>
+  <h3>The one template that covers 80% of tree problems</h3>
+  <div class="card">
+    <div class="mono">
+int solve(TreeNode node) {<br>
+    if (node == null) return BASE_CASE;     // define: 0, null, -inf, +inf, false<br>
+<br>
+    int left  = solve(node.left);           // get answer from left subtree<br>
+    int right = solve(node.right);          // get answer from right subtree<br>
+<br>
+    // Update global answer if path THROUGH this node is a candidate<br>
+    globalAns = max(globalAns, left + node.val + right);  // or whatever combines<br>
+<br>
+    // Return: what can I offer to MY parent? (usually single branch)<br>
+    return node.val + max(left, right);<br>
+}
+    </div>
+    <div style="font-size:12px;color:var(--color-text-secondary);margin-top:6px">Diameter, max path sum, longest zigzag, count good nodes — all use this exact skeleton. What changes is BASE_CASE, the globalAns update formula, and the return expression.</div>
+  </div>
+</div>
+
+<div id="drill" class="section">
+  <div class="tip"><b>The transfer drill.</b> This is the training method that actually builds pattern detection — not more problem solving, but structured analysis of problems you haven't solved yet.</div>
+
+  <div class="card">
+    <h3>The 10-minute analysis drill (do this on 2 new problems daily)</h3>
+    <div class="decision-step">
+      <div class="ds-num">1</div>
+      <div class="ds-body"><div class="ds-q">Read the problem statement. Set a 2-minute timer. Do NOT code.</div><div class="ds-a">In these 2 minutes: write down your answers to Q1 and Q2 from the framework (input shape, what is asked). Just those two.</div></div>
+    </div>
+    <div class="decision-step">
+      <div class="ds-num">2</div>
+      <div class="ds-body"><div class="ds-q">Write one sentence: "This problem is asking me to _____ on a _____ structure."</div><div class="ds-a">Example: "This problem is asking me to COUNT subarrays on an array structure." This forces you to abstract before you pattern-match.</div></div>
+    </div>
+    <div class="decision-step">
+      <div class="ds-num">3</div>
+      <div class="ds-body"><div class="ds-q">Now apply Q3 (constraints), Q4 (optimal substructure), Q5 (what's wasteful in brute force).</div><div class="ds-a">After 5 minutes of analysis, write your predicted pattern. Don't solve yet.</div></div>
+    </div>
+    <div class="decision-step">
+      <div class="ds-num">4</div>
+      <div class="ds-body"><div class="ds-q">Check the editorial or tag — were you right?</div><div class="ds-a">If YES: implement it. The win is the analysis, not the code.<br>If NO: figure out WHICH question you answered wrong in the framework. That question is your weak point — not the pattern.</div></div>
+    </div>
+    <div class="decision-step">
+      <div class="ds-num">5</div>
+      <div class="ds-body"><div class="ds-q">Write in your journal: "Signal I missed → pattern it maps to."</div><div class="ds-a">After 30 of these drills you have 30 signal-to-pattern mappings in your own words. That is your personal signal dictionary. Review before every mock.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>The "near-miss" analysis — most important habit</h3>
+    <div style="font-size:13px;line-height:1.8">
+      When you solve a problem wrong or freeze: don't just read the solution. Do this instead:
+      <div class="mono" style="margin-top:8px">
+1. Which of the 5 questions did you NOT ask?<br>
+2. Which constraint did you overlook?<br>
+3. What was the signal in the problem that you should have detected?<br>
+4. Write: "Next time I see [signal], I will think [pattern] because [reason]."
+      </div>
+      <div style="margin-top:8px;font-size:12px;color:var(--color-text-secondary)">This is the only form of deliberate practice that improves detection speed. Reading solutions improves implementation. Near-miss analysis improves detection.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Your personal signal dictionary template (fill one per new pattern learned)</h3>
+    <div class="mono">
+Signal (what I see in the problem): ___________________<br>
+Pattern (what to apply): ___________________<br>
+Why this pattern fits: ___________________<br>
+A problem where I first saw this: ___________________<br>
+A different problem with same signal (that I would have missed): ___________________
+    </div>
+    <div style="font-size:12px;color:var(--color-text-secondary);margin-top:6px">50 filled entries = you have pattern detection as a muscle. Not knowledge — a muscle.</div>
+  </div>
+
+  <div class="table-wrapper" style="border-color:#7F77DD">
+    <h3>The 30-day detection speed benchmark</h3>
+    <table>
+      <tr><th>Week</th><th>Target: time to identify pattern on unseen medium</th><th>How to measure</th></tr>
+      <tr><td>Week 1</td><td style="font-size:12px">10-15 minutes (using the 5-Q framework explicitly)</td><td style="font-size:12px">Timer from reading problem to writing pattern name</td></tr>
+      <tr><td>Week 2</td><td style="font-size:12px">5-8 minutes (framework becoming automatic)</td><td style="font-size:12px">Same timer, count how many Q's you skipped without thinking</td></tr>
+      <tr><td>Week 3</td><td style="font-size:12px">3-5 minutes (signals firing before framework completes)</td><td style="font-size:12px">Did you get it right? Wrong detections go back to near-miss analysis.</td></tr>
+      <tr><td>Week 4</td><td style="font-size:12px">Under 2 minutes (reflex)</td><td style="font-size:12px">Mock interview: can you name the pattern before writing a single line of code?</td></tr>
+    </table>
+    <div style="margin-top:8px;font-size:12px;color:var(--color-text-secondary)">Interview-ready = consistent pattern detection in under 3 minutes on mediums. That's the real bar, not "can solve hard problems."</div>
+  </div>
+</div>
+
+<script>
+function show(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+
+</body>
+</html>
